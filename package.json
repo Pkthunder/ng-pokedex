@@ -1,0 +1,28 @@
+{
+  "name": "ng-pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "node app/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pkthunder/ng-pokedex.git"
+  },
+  "author": "Jared Perreault (jared_perreault@yahoo.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pkthunder/ng-pokedex/issues"
+  },
+  "homepage": "https://github.com/Pkthunder/ng-pokedex#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0"
+  }
+}
