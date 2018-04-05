@@ -1,11 +1,8 @@
-var express = require('express');
-var mongoose = require('mongoose');
+const express = require('express');
 
-var router = express.Router();
+const db = require('../utils/db');
 
-var Skill = mongoose.model('Skill');
-var Item = mongoose.model('Item');
-var Pokemon = mongoose.model('Pokemon');
+const router = express.Router();
 
 // Middleware that sets defaults to query parameters
 router.use( function (req, res, next) {
@@ -14,69 +11,34 @@ router.use( function (req, res, next) {
 	next();
 });
 
+// GET /api/v1/items
 router.get('/items', function (req, res, next) {
-	Item.find({}).limit(req.query.limit).exec()
-	.then( function (items) {
-		res.json(items);
-	});
+	res.json(db.items.toArray(req.query.limit));
 });
 
-router.get('/item/i/:id', function (req, res, next) {
-	Item.findOne({_id: req.params.id}).exec()
-	.then( function (item) {
-		res.json(item);
-	});
+// GET /api/v1/items/i/:id
+router.get('/items/i/:id', function (req, res, next) {
+	res.json(db.items[req.params.id]);
 });
 
+// GET /api/v1/skills
 router.get('/skills', function (req, res, next) {
-	Skill.find({}).limit(req.query.limit).exec()
-	.then( function (skills) {
-		res.json(skills);
-	});
+    res.json(db.skills.toArray(req.query.limit));
 });
 
-router.get('/skill/s/:id', function (req, res, next) {
-	Skill.findOne({_id: req.params.id}).exec()
-	.then( function (skill) {
-		res.json(skill);
-	});
+// GET /api/v1/skills/s/:id
+router.get('/skills/s/:id', function (req, res, next) {
+    res.json(db.skills[req.params.id]);
 });
 
-var getPokemonQuery = function (query, populate) {
-	populate = (populate == 'false') ? false : true;
-
-	if (populate) {
-		query = query.populate({
-			path: 'moves.skill',
-			model: 'Skill'
-		});
-	}
-
-	return query;
-};
-
+// GET /api/v1/pokemon
 router.get('/pokemon', function (req, res, next) {
-	var query = getPokemonQuery(
-		Pokemon.find({}).limit(req.query.limit), 
-		req.query.populate || true);
-
-
-	query.exec()
-	.then( function (pokemon) {
-		res.json(pokemon);
-	});
+    res.json(db.pokemon.toArray(req.query.limit));
 });
 
+// GET /api/v1/pokemon/p/:id
 router.get('/pokemon/p/:id', function (req, res, next) {
-	var query = getPokemonQuery(
-		Pokemon.findOne({_id: req.params.id}),
-		req.query.populate || true);
-
-	query.exec()
-	.then( function (pokemon) {
-		res.json(pokemon);
-	});
+    res.json(db.pokemon[req.params.id]);
 });
-
 
 module.exports = router;

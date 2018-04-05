@@ -1,13 +1,11 @@
-var express = require('express');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var path = require('path');
+const express = require('express');
+const logger = require('morgan');
+const path = require('path');
 
-var db = require('./db');
-var routes = require('./routes');
+const db = require('./utils/db');
+const routes = require('./routes');
 
-var app = express();
+const app = express();
 
 // mount morgan module for access logging
 app.use(logger('dev'));
@@ -22,7 +20,7 @@ app.use(routes);
 
 // 404 detector
 app.use( function (req, res, next) {
-	var err = new Error('Not Found');
+	const err = new Error('Not Found');
 	err.status = 404;
 
 	next(err);
@@ -33,11 +31,11 @@ app.use( function (err, req, res, next) {
 	res.send(err.message);
 });
 
-db.connect()
+db.init()
 .then( function () {
-	var server = app.listen(4000, function () {
-		var host = server.address().address;
-		var port = server.address().port;
+	const server = app.listen(4000, function () {
+		let host = server.address().address;
+		const port = server.address().port;
 
 		host = (host == '::') ? 'localhost' : host;
 
@@ -45,4 +43,4 @@ db.connect()
 		console.log('Starting ng-pokedex server, running on pid: %s', process.pid);
 		console.log('ng-pokedex is listening at http://%s:%s', host, port);
 	});
-})
+});

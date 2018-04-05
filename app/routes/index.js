@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', function (req, res, next) {
 	res.send('Hello! - \u7279\u6b8a');
