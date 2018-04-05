@@ -5,6 +5,19 @@ It serves "Pokedex" data which meant to be consumed by a frontend client
 written in any framework of one's choosing, i.e.: jQuery, AngularJS, Angular,
 Vue or React
 
+### Installation
+```bash
+$ git clone https://github.com/Pkthunder/ng-pokedex.git
+$ cd ng-pokedex
+$ npm install
+```
+### Getting Started
+To start the API server
+```bash
+$ cd ng-pokedex
+$ npm start
+```
+
 ### Configuration
 
 The only configuration is the port number the RESET API is hosted on.
