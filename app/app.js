@@ -33,7 +33,7 @@ app.use( function (err, req, res, next) {
 
 db.init()
 .then( function () {
-	const server = app.listen(4000, function () {
+	const server = app.listen(process.env.NG_POKEDEX_PORT || 4000, function () {
 		let host = server.address().address;
 		const port = server.address().port;
 
