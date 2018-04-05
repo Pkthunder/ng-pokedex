@@ -4,6 +4,13 @@ const db = require('../utils/db');
 
 const router = express.Router();
 
+// Middleware to set CORS header(s)
+router.use( function (req, res, next) {
+   res.header('Access-Control-Allow-Origin', '*');
+
+   next();
+});
+
 // Middleware that sets defaults to query parameters
 router.use( function (req, res, next) {
 	req.query.limit = (!!req.query.limit) ? parseInt(req.query.limit, 10) : 0;
