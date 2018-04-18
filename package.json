@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/Pkthunder/pokedex-api.git"
   },
+  "bin": {
+    "pokedex-api": "./bin/pokedex-api",
+  },
   "author": "Jared Perreault (jared_perreault@yahoo.com)",
   "license": "MIT",
   "bugs": {
