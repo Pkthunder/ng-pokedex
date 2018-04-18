@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const spawn = require('child_process').spawn;
+const path = require('path');
+
+const args = [path.join(__dirname, '../app/app.js')];
+
+const proc = spawn(process.execPath, args, {
+	stdio: 'inherit'
+});
+
+proc.on('exit', (code, signal) => {
+  process.on('exit', () => {
+    if (signal) {
+      process.kill(process.pid, signal);
+    } else {
+      process.exit(code);
+    }
+  });
+});
