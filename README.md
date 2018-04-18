@@ -1,20 +1,20 @@
-# ng-pokedex
+# pokedex-api
 
-ng-pokedex is a RESTful API designed for educational purposes. 
+pokedex-api is a RESTful API designed for educational purposes. 
 It serves "Pokedex" data which meant to be consumed by a frontend client 
 written in any framework of one's choosing, i.e.: jQuery, AngularJS, Angular,
 Vue or React
 
 ### Installation
 ```bash
-$ git clone https://github.com/Pkthunder/ng-pokedex.git
-$ cd ng-pokedex
+$ git clone https://github.com/Pkthunder/pokedex-api.git
+$ cd pokedex-api
 $ npm install
 ```
 ### Getting Started
 To start the API server
 ```bash
-$ cd ng-pokedex
+$ cd pokedex-api
 $ npm start
 ```
 

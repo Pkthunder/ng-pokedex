@@ -1,5 +1,5 @@
 {
-  "name": "ng-pokedex",
+  "name": "pokedex-api",
   "version": "1.0.0",
   "description": "",
   "main": "app/app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pkthunder/ng-pokedex.git"
+    "url": "git+https://github.com/Pkthunder/pokedex-api.git"
   },
   "author": "Jared Perreault (jared_perreault@yahoo.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Pkthunder/ng-pokedex/issues"
+    "url": "https://github.com/Pkthunder/pokedex-api/issues"
   },
-  "homepage": "https://github.com/Pkthunder/ng-pokedex#readme",
+  "homepage": "https://github.com/Pkthunder/pokedex-api#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
     "express": "^4.16.3",

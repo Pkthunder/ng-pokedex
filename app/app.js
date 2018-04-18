@@ -40,7 +40,7 @@ db.init()
 		host = (host == '::') ? 'localhost' : host;
 
 		console.log('Current NODE_ENV value: %s', app.get('env'));
-		console.log('Starting ng-pokedex server, running on pid: %s', process.pid);
-		console.log('ng-pokedex is listening at http://%s:%s', host, port);
+		console.log('Starting pokedex-api server, running on pid: %s', process.pid);
+		console.log('pokedex-api is listening at http://%s:%s', host, port);
 	});
 });
