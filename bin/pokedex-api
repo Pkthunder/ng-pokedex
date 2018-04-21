@@ -8,8 +8,8 @@ const path = require('path');
 const args = [path.join(__dirname, '../app/app.js')];
 
 const proc = spawn(process.execPath, args, {
-	stdio: 'ignore',
-	detached: true
+	// detached: true,
+	stdio: 'ignore'
 });
 
 proc.on('exit', (code, signal) => {
