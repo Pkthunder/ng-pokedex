@@ -6,19 +6,19 @@ const Promise = require('bluebird');
 const path = require('path');
 
 Array.prototype.limit = function (limit) {
-    return this.slice(0, this.length - limit);
+    return this.slice(0, limit);
 };
 
 const DATA_PATH = path.resolve(__dirname, '../../data');
 
 class Collection {
     constructor () {
-        this._len = 1;
+        this._len = 0;
     }
 
     add (item) {
+        this._len += 1;
         const idx = this._len;
-        this._len++;
 
         this[idx] = item;
 
@@ -118,6 +118,8 @@ const loadItems = function () {
             name:           item.ename
         });
     });
+
+    return _db.items.length;
 };
 
 const loadSkills = function () {
@@ -151,6 +153,8 @@ const loadSkills = function () {
             pp: 			s.pp || null
         });
     });
+
+    return _db.skills.length;
 };
 
 const loadPokemon = function () {
@@ -199,17 +203,22 @@ const loadPokemon = function () {
             skills:         parseLearnSet(p.skills)
         });
     });
+
+    return _db.pokemon.length;
 };
 
 const loadMockDatabase = function () {
     console.log('loading items...');
-    loadItems();
+    const items = loadItems();
+    console.log(`${ items } items were loaded`);
 
     console.log('loading skills...');
-    loadSkills();
+    const skills = loadSkills();
+    console.log(`${ skills } skills were loaded`);
 
     console.log('loading Pokemon...');
-    loadPokemon();
+    const pokemon = loadPokemon();
+    console.log(`${ pokemon } pokemon were loaded`);
 
     return _db;
 };
