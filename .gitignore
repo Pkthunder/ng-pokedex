@@ -3,3 +3,8 @@ npm-debug.log
 node_modules
 
 .idea
+
+app/static/
+!app/static/.gitkeep
+app/static/sprites
+!app/static/sprites/.gitkeep

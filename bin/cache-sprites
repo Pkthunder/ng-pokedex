@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const request = require('request');
+const Promise = require('bluebird');
+const fs = require('fs');
+const path = require('path');
+
+const STATIC_DIR = path.join(__dirname, '../app/static/sprites/');
+
+// check if the directory has anything in it. If it does assume the sprites have already been loaded
+// (greater than 1 because .gitkeep will count as one)
+if (fs.readdirSync(STATIC_DIR).length > 1) {
+    console.log(`Files were detected in the sprites directory. Exiting...`);
+    console.log(`Run 'rm -r app/static/sprites/*' and re-run this command, if needed`);
+    process.exit();
+}
+
+const pokemon = require(path.join(__dirname, '../data/pokedex.json'));
+
+// Sprites: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{index}.png
+// Larger Images: https://img.pokemondb.net/artwork/bulbasaur.jpg
+const BASE_SPRITE_URI = 'https://img.pokemondb.net/artwork/:name:.jpg';
+
+Promise.mapSeries(pokemon, p => {
+    // TODO: find the sprite per each Pokemon
+    const imgUri = BASE_SPRITE_URI.replace(':name:', p.ename.toLowerCase());
+
+    const imgExt = imgUri.slice(imgUri.lastIndexOf('/') + 1);
+    const imgPath = path.join(STATIC_DIR, imgExt);
+
+    return new Promise( (resolve, reject) => {
+        const s = request.get(imgUri)
+        .on('error', function (err) {
+            s.end();
+            reject(err);
+        })
+        .pipe(fs.createWriteStream(imgPath))
+        .on('finish', function () {
+            const msg = `Successfully downloaded ${ p.ename }`;
+            console.log(msg);
+            resolve(msg);       // TODO: add timeout delay to avoid potential DDOS attack defenses
+        });
+    });
+});
